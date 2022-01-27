@@ -11,8 +11,6 @@ app.set('port', process.env.PORT || 3000);
 app.use(
   // 요청, 응답에 대한 좀 더 디테일한 로그 출력
   morgan('dev'),
-  // 요청 경로가 "/" 일 때 public 폴더에 있는 정적 파일(html, css 등) 제공
-  express.static('/', path.join(__dirname, 'public')),
   // json request body 파싱
   express.json(),
   // 요청 경로의 querystring 해석
