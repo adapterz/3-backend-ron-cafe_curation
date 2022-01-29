@@ -3,8 +3,8 @@ const morgan = require('morgan');
 const path = require('path');
 
 require('dotenv').config();
-const mysql = require('./config/mysql');
-const userRouter = require('./routes/user');
+
+const userRouter = require('./routes/user.routes');
 
 // express 인스턴스 생성
 const app = express();
@@ -20,7 +20,7 @@ app.use(
   express.urlencoded({ extended: false }),
 );
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 // GET method route
 // respond with "Hello World!" when a GET request is made to the hompage
