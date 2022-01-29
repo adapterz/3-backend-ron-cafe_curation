@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 // 사용자 정보 조회
 exports.findAll = function (req, res) {
@@ -37,4 +38,32 @@ exports.create = function (req, res) {
     });
   });
   console.log('회원가입 성공');
+};
+exports.login = function (req, res) {
+  const emailValue = req.body.email;
+  const passwordValue = req.body.password;
+  let userInfo;
+  User.findByEmail(emailValue, function (err, user) {
+    if (!user.length) {
+      // user 가 존재하지 않으면
+      return res
+        .status(400)
+        .send({ message: '해당 이메일은 등록되어 있지 않습니다.' });
+    } else {
+      userInfo = user[0];
+      // 비밀번호 일치 여부 검사
+      const check = bcrypt.compareSync(passwordValue, userInfo.password);
+
+      if (isRight) {
+        console.log('로그인 성공');
+        // 로그인 성공 후 메인 페이지로 이동
+        res.status(200).redirect('/');
+      } else {
+        res.status(400).send({
+          message:
+            '비밀번호를 잘못 입력하셨습니다. 다시 입력해주시기 바랍니다.',
+        });
+      }
+    }
+  });
 };

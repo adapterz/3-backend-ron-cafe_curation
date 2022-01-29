@@ -1,5 +1,3 @@
-'use strict';
-
 const { body, check } = require('express-validator');
 
 module.exports = [

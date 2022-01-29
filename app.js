@@ -25,8 +25,8 @@ app.use('/users', userRouter);
 // GET method route
 // respond with "Hello World!" when a GET request is made to the hompage
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-  console.log('it is not end');
+  console.log('메인 페이지입니다.');
+  res.status(200).send('Hello World!');
 });
 
 app.get('/user/:name', function (req, res) {
