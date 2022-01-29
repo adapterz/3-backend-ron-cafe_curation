@@ -1,6 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+
+require('dotenv').config();
+const mysql = require('./config/mysql');
 const userRouter = require('./routes/user');
 
 // express 인스턴스 생성
