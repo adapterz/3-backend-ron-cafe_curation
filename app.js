@@ -17,7 +17,7 @@ app.use(
   // json request body 파싱
   express.json(),
   // 요청 경로의 querystring 해석
-  express.urlencoded({ extended: false }),
+  express.urlencoded({ extended: true }),
 );
 
 app.use('/users', userRouter);
