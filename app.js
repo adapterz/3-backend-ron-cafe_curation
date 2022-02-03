@@ -22,37 +22,6 @@ app.use(
 
 app.use('/users', userRouter);
 
-// GET method route
-// respond with "Hello World!" when a GET request is made to the hompage
-app.get('/', function (req, res) {
-  console.log('메인 페이지입니다.');
-  res.status(200).send('Hello World!');
-});
-
-app.get('/user/:name', function (req, res) {
-  console.log(req.params);
-});
-
-app.get('/search', function (req, res) {
-  console.log(req.query);
-  res.send(req.query);
-});
-// POST method route
-// 애플리케이션의 홈페이지인 루트 라우트(/) 에서 POST 요청에 응답:
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-// PUT method route
-// /user 라우트에 대한 PUT 요청에 응답:
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-// DELETE method route
-// /user 라우트에 대한 DELETE 요청에 응답:
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-
 app.listen(app.get('port'), () => {
   console.log(`Example app listening at http://localhost:${app.get('port')}`);
 });

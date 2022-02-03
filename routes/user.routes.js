@@ -7,6 +7,10 @@ const { validateCallback } = require('../middlewares/validateCallback');
 const { passwordEncryption } = require('../middlewares/passwordEncryption');
 const userLoginValidate = require('../middlewares/userLoginValidate');
 const { upload, uploadCallback } = require('../middlewares/userProfileUpload');
+const {
+  decryptUserPrivateInfo,
+  encryptUserPrivateInfo,
+} = require('../middlewares/userPrivateInfoEncryption');
 
 // 사용자 정보 조회
 userRouter.get('/', UserController.findAll);
@@ -15,8 +19,9 @@ userRouter.get('/:value', UserController.findByValue);
 userRouter.post(
   '/register',
   [upload.single('profile'), uploadCallback], // 이미지 파일 서버 폴더 업로드 및 파일 경로 req 객체에 추가
+  decryptUserPrivateInfo,
   [userRegisterValidate, validateCallback], // 입력 값 유효성 검사 및 비밀번호 암호화
-  passwordEncryption, // 비밀번호 암호화
+  [encryptUserPrivateInfo, passwordEncryption], // 비밀번호 암호화
   UserController.create,
 );
 // 사용자 로그인
